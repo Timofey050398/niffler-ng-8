@@ -3,9 +3,9 @@ package guru.qa.niffler.test.web;
 import com.codeborne.selenide.Selenide;
 import com.github.javafaker.Faker;
 import guru.qa.niffler.config.Config;
-import guru.qa.niffler.jupiter.BrowserExtension;
-import guru.qa.niffler.jupiter.DoRegister;
-import guru.qa.niffler.model.PasswordType;
+import guru.qa.niffler.jupiter.extension.BrowserExtension;
+import guru.qa.niffler.jupiter.annotation.DoRegister;
+import guru.qa.niffler.model.ElementType;
 import guru.qa.niffler.model.User;
 import guru.qa.niffler.page.LoginPage;
 import guru.qa.niffler.page.RegistrationPage;
@@ -68,13 +68,13 @@ class RegistrationTest {
                 .setPassword(password)
                 .setPasswordSubmit(password)
                 .assertPassword(password)
-                .assertPasswordType(PasswordType.PASSWORD)
+                .assertPasswordType(ElementType.PASSWORD)
                 .showPassword()
-                .assertPasswordType(PasswordType.TEXT)
+                .assertPasswordType(ElementType.TEXT)
                 .assertPasswordSubmit(password)
-                .assertPasswordSubmitType(PasswordType.PASSWORD)
+                .assertPasswordSubmitType(ElementType.PASSWORD)
                 .showPasswordSubmit()
-                .assertPasswordSubmitType(PasswordType.TEXT);
+                .assertPasswordSubmitType(ElementType.TEXT);
     }
 
     @Test
