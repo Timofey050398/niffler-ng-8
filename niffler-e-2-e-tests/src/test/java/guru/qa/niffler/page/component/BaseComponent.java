@@ -3,27 +3,25 @@ package guru.qa.niffler.page.component;
 import com.codeborne.selenide.SelenideDriver;
 import com.codeborne.selenide.SelenideElement;
 import guru.qa.niffler.page.SelenideProviderService;
-import org.jetbrains.annotations.NotNull;
+import lombok.Getter;
 
-import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
-
+@ParametersAreNonnullByDefault
+@Getter
 public abstract class BaseComponent<T extends BaseComponent<?>> extends SelenideProviderService {
 
-    @Nonnull
+
     protected final SelenideElement self;
 
-    protected BaseComponent(SelenideDriver driver, @NotNull SelenideElement self){
+    protected BaseComponent(@Nullable SelenideDriver driver, SelenideElement self){
         super(driver);
         this.self = self;
     }
 
     protected BaseComponent(SelenideElement self) {
-        this(null,self);
-    }
-
-    @Nonnull
-    public SelenideElement getSelf() {
-        return self;
+        super();
+        this.self = self;
     }
 }

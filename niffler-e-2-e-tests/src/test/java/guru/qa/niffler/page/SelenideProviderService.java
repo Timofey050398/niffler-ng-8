@@ -6,16 +6,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Collection;
 
 public abstract class SelenideProviderService {
-    protected final SelenideDriver driver;
+    protected final @Nullable SelenideDriver driver;
 
-    public SelenideProviderService(SelenideDriver driver) {
+    public SelenideProviderService(@Nullable SelenideDriver driver) {
         this.driver = driver;
-        if (driver != null) {
-            NonStaticBrowserExtension.add(driver);
-        }
+        NonStaticBrowserExtension.add(driver);
+    }
+
+    public SelenideProviderService() {
+        this.driver = null;
     }
 
     public SelenideDriver driver(){
@@ -30,7 +34,7 @@ public abstract class SelenideProviderService {
     }
 
     
-    public SelenideElement $(String cssSelector) {
+    public SelenideElement $(@Nonnull String cssSelector) {
         return driver == null
                 ? Selenide.$(cssSelector)
                 : driver.$(cssSelector);
