@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ParametersAreNonnullByDefault
-public class ProfilePage extends BasePage {
+public class ProfilePage extends BasePage<ProfilePage> {
 
     private final SelenideElement avatarImage  = $("main img");
     private final SelenideElement categoryInput = $("input[name='category']");
@@ -46,7 +46,7 @@ public class ProfilePage extends BasePage {
 
 
     public ProfilePage() {
-        this(null);
+        super();
     }
 
     @Step("Set category: '{0}'")

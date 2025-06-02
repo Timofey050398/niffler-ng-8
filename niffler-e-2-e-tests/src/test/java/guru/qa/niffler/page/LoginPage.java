@@ -5,6 +5,7 @@ import com.codeborne.selenide.SelenideDriver;
 import com.codeborne.selenide.SelenideElement;
 import guru.qa.niffler.model.ElementType;
 import guru.qa.niffler.model.UserJson;
+import guru.qa.niffler.page.component.Header;
 import io.qameta.allure.Step;
 
 import javax.annotation.Nullable;
@@ -15,27 +16,21 @@ import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Selectors.byText;
 
 @ParametersAreNonnullByDefault
-public class LoginPage extends BasePage {
+public class LoginPage extends BasePage<LoginPage> {
 
-  private final SelenideElement usernameInput;
-  private final SelenideElement passwordInput;
-  private final SelenideElement submitBtn;
-  private final SelenideElement registerButton;
-  private final SelenideElement showPasswordIcon;
-  private final SelenideElement errorComponent;
+  private final SelenideElement usernameInput = $("input[name='username']");
+  private final SelenideElement passwordInput = $("input[name='password']");
+  private final SelenideElement submitBtn = $("button[type='submit']");
+  private final SelenideElement registerButton = $("a[class='form__register']");
+  private final SelenideElement showPasswordIcon = $("button[class=form__password-button]");
+  private final SelenideElement errorComponent = $(byText("Неверные учетные данные пользователя"));
 
   public LoginPage(@Nullable SelenideDriver driver) {
     super(driver);
-    this.usernameInput = $("input[name='username']");
-    this.passwordInput = $("input[name='password']");
-    this.submitBtn = $("button[type='submit']");
-    this.registerButton = $("a[class='form__register']");
-    this.showPasswordIcon = $("button[class=form__password-button]");
-    this.errorComponent = $(byText("Неверные учетные данные пользователя"));
   }
 
   public LoginPage() {
-    this(null);
+    super();
   }
 
   @Step("Log in with user {username}")
@@ -104,5 +99,10 @@ public class LoginPage extends BasePage {
   public LoginPage assertError(){
     errorComponent.shouldBe(Condition.visible,Duration.ofSeconds(5));
     return this;
+  }
+
+  @Override
+  public Header getHeader(){
+    throw new UnsupportedOperationException("Login page haven't header");
   }
 }
