@@ -10,6 +10,9 @@ public interface Config {
       : LocalConfig.INSTANCE;
   }
 
+  @Nonnull
+  String allureDockerServiceUrl();
+
   String frontUrl();
 
   String authUrl();
@@ -43,5 +46,8 @@ public interface Config {
 
   default int currencyGrpcPort() {
     return 8092;
-  };
+  }
+
+  @Nonnull
+  String screenshotBaseDir();
 }
